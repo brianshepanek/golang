@@ -1,8 +1,8 @@
 golang-server :
     container_name : golang-server
-    image : golang:1.5.1
+    image : golang:1.5.2
     volumes :
         - $PWD:/go
     ports :
         - "80:8080"
-    command : "go run src/app.go"    
+    command : bash -c "go install app && app"    
