@@ -1,3 +1,19 @@
+postgres-data :
+    container_name : postgres-data
+    image : postgres:9.4.5
+    entrypoint : /bin/echo
+    command : Data-only container for postgres
+    volumes :
+       - /var/lib/postgresql/data
+postgres-server :
+    container_name : postgres-server
+    image : postgres:9.4.5
+    ports :
+        - "5432:5432"
+    volumes_from :
+        - postgres-data
+    environment :
+        - POSTGRES_PASSWORD=password
 golang-server :
     container_name : golang-server
     image : golang:1.5.2
@@ -5,4 +21,6 @@ golang-server :
         - $PWD:/go
     ports :
         - "80:8080"
+    links :
+        - postgres-server     
     command : bash -c "go install app && app"    
