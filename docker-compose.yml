@@ -18,9 +18,9 @@ golang-server :
     container_name : golang-server
     image : golang:1.5.2
     volumes :
-        - $PWD:/go
+        - .:/go
     ports :
-        - "80:8080"
+        - "8081:8080"
     links :
         - postgres-server     
     command : bash -c "go install app && app"    
